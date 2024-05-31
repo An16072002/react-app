@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>ReactJS Lists</title>
+      <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+      <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+      <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+      <style>
+         .employee-list  {
+           border:1px solid #cbbfab;
+           list-style-type : none;
+           padding: 5px;
+           margin: 5px;
+         }
+         .employee {
+            border: 1px solid #ccc;
+            margin: 5px;
+            padding: 5px;
+         }
+      </style>
+   </head>
+   <body>
+      <h3>React Lists:</h3>
+
+      <div id="employeelist1"></div>
+
+      <script  type="text/babel">
+
+
+class Employee extends React.Component {
+    render() {
+      return (
+        <li className="employee">
+          <div>
+            <b>Full Name:</b> {this.props.fullName}
+          </div>
+          <div>
+            <b>Gender:</b> {this.props.gender}
+          </div>
+        </li>
+      );
+    }
+  }
+  
+  
+  class EmployeeList extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        employees: [
+          { empId: 1, fullName: "Trump", gender: "Male" },
+          { empId: 2, fullName: "Ivanka", gender: "Female" },
+          { empId: 3, fullName: "Kushner", gender: "Male" }
+        ]
+      };
+    }
+  
+    render() {
+     
+      var listItems = this.state.employees.map(e => (
+        <Employee fullName={e.fullName} gender={e.gender} />
+      ));
+      return (
+          <ul className="employee-list">
+             {listItems}
+          </ul>
+        );
+    }
+  }
+  const container = document.getElementById("employeelist1");
+  const root = ReactDOM.createRoot(container);
+  root.render(<EmployeeList />);
+
+
+
+      </script>
+   </body>
+</html>
